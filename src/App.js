@@ -3,7 +3,6 @@ import './App.css';
 
 function App() {
   const [message, setMessage] = useState('');
-  const [data, setData] = useState(null);
   const [pageContent, setPageContent] = useState({
     home: '',
     aboutMe: '',
@@ -14,12 +13,11 @@ function App() {
   const [editing, setEditing] = useState(null);  // Track which page is being edited
 
   useEffect(() => {
-    // Fetch the message and data from the serverless function
+    // Fetch the message from the serverless function
     fetch('/.netlify/functions/hello')
       .then((res) => res.json())
       .then((data) => {
         setMessage(data.message);
-        setData(data.data);
       })
       .catch((error) => console.error('Error fetching function:', error));
 
@@ -61,7 +59,7 @@ function App() {
     <div className="App">
       <h1>Netlify Serverless Function & MongoDB Test</h1>
       <p>{message}</p>
-      
+
       <nav>
         <ul>
           <li><a href="#home">Home</a></li>
@@ -72,6 +70,7 @@ function App() {
         </ul>
       </nav>
 
+      {/* Home Section */}
       <div>
         <h3>Home</h3>
         {editing === 'home' ? (
@@ -90,6 +89,7 @@ function App() {
         )}
       </div>
 
+      {/* About Me Section */}
       <div>
         <h3>About Me</h3>
         {editing === 'aboutMe' ? (
@@ -108,7 +108,7 @@ function App() {
         )}
       </div>
 
-      {/* Repeat similar blocks for Skills, Projects, and Contact Me */}
+      {/* Skills Section */}
       <div>
         <h3>Skills</h3>
         {editing === 'skills' ? (
@@ -127,6 +127,7 @@ function App() {
         )}
       </div>
 
+      {/* Projects Section */}
       <div>
         <h3>Projects</h3>
         {editing === 'projects' ? (
@@ -145,6 +146,7 @@ function App() {
         )}
       </div>
 
+      {/* Contact Me Section */}
       <div>
         <h3>Contact Me</h3>
         {editing === 'contactMe' ? (
